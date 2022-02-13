@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,7 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-
+<div>
+    <a th:href="@{/login}" th:if="${#session.getAttribute('isLogin') == null}">로그인</a>
+    <p th:if="${#session.getAttribute('isLogin')}" th:text="${#session.getAttribute('userEmail')}">userEmail</p>
+</div>
 <h1>글 목록</h1>
 <a href="/manage">글 작성</a>
 <p th:text="${name}"></p>

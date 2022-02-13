@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -15,11 +16,13 @@ public class HomeController {
     private BoardRepository boardRepository;
 
     @GetMapping("/")
-    public String homePage(Model model){
+    public String homePage(Model model, HttpSession session){
 
         model.addAttribute("name","zinna");
         List<BoardEntity> list = boardRepository.findAll();
         model.addAttribute("list",list);
+        model.addAttribute("isLogin",session.getAttribute("isLogin") == null ? false : session.getAttribute("isLogin"));
+        model.addAttribute("userEmail", session.getAttribute("userEmail"));
         return "index";
     }
 
