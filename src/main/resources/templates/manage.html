@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>새글 생성</h1>
+<form action="/post" method="post">
+    <input th:if="${board.id != null}" type="hidden" name="id" th:value="${board.id}"/>
+    <input type="text" name="title" placeholder="제목" th:value="${board.title}"/>
+    <textarea name="content" placeholder="내용" th:text="${board.content}"></textarea>
+    <button type="submit">저장</button>
+</form>
+</body>
+</html>
