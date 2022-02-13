@@ -1,6 +1,7 @@
 package com.example.javacrud;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +17,15 @@ public class HomeController {
     private BoardRepository boardRepository;
 
     @GetMapping("/")
-    public String homePage(Model model, HttpSession session){
+    public String homePage(
+            Model model,
+            Authentication authentication
+    ){
 
         model.addAttribute("name","zinna");
         List<BoardEntity> list = boardRepository.findAll();
         model.addAttribute("list",list);
+        model.addAttribute("authentication", authentication);
         return "index";
     }
 

@@ -18,26 +18,26 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String postLogin(
-            String userEmail,
-            String password,
-            HttpSession session
-    ){
-        UserEntity user = userRepository.findByUserEmail(userEmail)
-                .orElse(null);
-
-        if(user == null){
-            return "redirect:/login?error";
-        }
-
-        if(!user.getPassword().equals(password)){
-            return "redirect:/login?error";
-        }
-
-        session.setAttribute("user", user);
-        return "redirect:/";
-    }
+//    @PostMapping("/login")
+//    public String postLogin(
+//            String userEmail,
+//            String password,
+//            HttpSession session
+//    ){
+//        UserEntity user = userRepository.findByUserEmail(userEmail)
+//                .orElse(null);
+//
+//        if(user == null){
+//            return "redirect:/login?error";
+//        }
+//
+//        if(!user.getPassword().equals(password)){
+//            return "redirect:/login?error";
+//        }
+//
+//        session.setAttribute("user", user);
+//        return "redirect:/";
+//    }
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("user");

@@ -8,9 +8,9 @@
     <title>Document</title>
 </head>
 <body>
-<form action="/login" method="post">
+<form th:action="@{/login}" method="post">
     <input type="text" name="userEmail" placeholder="user email">
-    <input type="passwoad" name="password" placeholder="passowrd">
+    <input type="password" name="password" placeholder="passowrd">
     <button type="submit">로그인</button>
 </form>
 </body>
