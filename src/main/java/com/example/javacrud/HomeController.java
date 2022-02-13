@@ -21,8 +21,6 @@ public class HomeController {
         model.addAttribute("name","zinna");
         List<BoardEntity> list = boardRepository.findAll();
         model.addAttribute("list",list);
-        model.addAttribute("isLogin",session.getAttribute("isLogin") == null ? false : session.getAttribute("isLogin"));
-        model.addAttribute("userEmail", session.getAttribute("userEmail"));
         return "index";
     }
 
