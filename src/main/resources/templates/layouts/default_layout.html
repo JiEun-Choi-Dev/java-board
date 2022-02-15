@@ -9,13 +9,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <th:bolck th:replace="fragment/config :: configFragment"></th:bolck>
+    <th:bolck th:replace="fragments/config :: configFragment"></th:bolck>
 </head>
 <body>
-    <th:block th:replace="fragment/header :: headerFragment"></th:block>
+    <th:block th:replace="fragments/header :: headerFragment"></th:block>
 
     <th:block layout:fragment="content"></th:block>
 
-    <th:block th:replace="fragment/footer :: footerFragment"> </th:block>
+    <th:block th:replace="fragments/footer :: footerFragment"> </th:block>
 </body>
 </html>
