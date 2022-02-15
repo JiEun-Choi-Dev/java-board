@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/page/home.css}" >
+    </th:block>
+
+    <!-- index.html 고유 스크립트 추가 -->
+    <th:block layout:fragment="script">
+        <script th:src="@{/js/page/home.js}"></script>
+    </th:block>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div>
+            <a th:href="@{/login}" sec:authorize="!isAuthenticated()">로그인</a>
+            <a th:href="@{/register}" sec:authorize="!isAuthenticated()">회원가입</a>
+            <a th:href="@{/logout}"  sec:authorize="isAuthenticated()">로그아웃</a>
+            <p sec:authorize="isAuthenticated()" sec:authentication="name">userEmail</p>
+        </div>
+        <h1>글 목록</h1>
+        <a href="/manage">글 작성</a>
+        <p th:text="${name}"></p>
+        <ul>
+            <li th:each="item, index : ${list}">
+                <a th:href="@{/post/__${item.id}__}" th:text="${item.title}">글 제목</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

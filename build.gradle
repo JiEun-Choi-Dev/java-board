@@ -30,7 +30,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
     implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5"
-
+    implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect'
 }
 
 tasks.named('test') {
