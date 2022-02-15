@@ -1,10 +1,15 @@
 package com.example.javacrud;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -15,7 +20,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginPage() {
-        return "login";
+        return "pages/login";
     }
 
 //    @PostMapping("/login")
@@ -39,9 +44,12 @@ public class LoginController {
 //        return "redirect:/";
 //    }
     @GetMapping("/logout")
-    public String logout(HttpSession session){
-        session.removeAttribute("user");
-
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+//        session.removeAttribute("user");
         return "redirect:/";
     }
 }

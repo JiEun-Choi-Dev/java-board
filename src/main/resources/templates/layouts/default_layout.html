@@ -14,8 +14,10 @@
 <body>
     <th:block th:replace="fragments/header :: headerFragment"></th:block>
 
-    <th:block layout:fragment="content"></th:block>
+    <section class="container">
+        <th:block layout:fragment="content"></th:block>
+    </section>
 
-    <th:block th:replace="fragments/footer :: footerFragment"> </th:block>
+    <th:block th:replace="fragments/footer :: footerFragment"></th:block>
 </body>
 </html>

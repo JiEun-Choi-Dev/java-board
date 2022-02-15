@@ -1,7 +1,20 @@
 <!doctype html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <div th:fragment="headerFragment">
-        <h1>HEADER</h1>
+        <nav class="navbar navbar-expand-sm justify-content-between">
+            <a class="navbar-brand" href="#">
+                <img src="/static/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                <span class="fcolor_primary">ZINNABOARD</span>
+            </a>
+            <div class="d-flex">
+                <span class="mr-1 font-weight-bold" sec:authorize="isAuthenticated()" sec:authentication="name">userEmail</span>
+                <span class="mr-3" sec:authorize="isAuthenticated()">님! 반가워요 :)</span>
+                <a class="btn btn-custom btn-outline-dark mr-2" th:href="@{/login}" sec:authorize="!isAuthenticated()">로그인</a>
+                <a class="btn btn-custom btn-dark" th:href="@{/register}" sec:authorize="!isAuthenticated()">회원가입</a>
+                <a class="text-secondary" th:href="@{/logout}"  sec:authorize="isAuthenticated()">로그아웃</a>
+            </div>
+        </nav>
     </div>
 </html>

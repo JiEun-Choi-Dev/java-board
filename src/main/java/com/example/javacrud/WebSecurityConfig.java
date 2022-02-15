@@ -36,8 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("userEmail")
-                .passwordParameter("password");
-
+                .passwordParameter("password")
+                .and()
+                .logout()
+                .logoutUrl("/logout");
     }
 
     @Bean
