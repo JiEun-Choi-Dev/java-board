@@ -1,6 +1,7 @@
 package com.example.javacrud;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,7 @@ public class HomeController {
     ){
 
         model.addAttribute("name","zinna");
-        List<BoardEntity> list = boardRepository.findAll();
+        List<BoardEntity> list = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
         model.addAttribute("list",list);
         model.addAttribute("authentication", authentication);
         return "pages/index";
