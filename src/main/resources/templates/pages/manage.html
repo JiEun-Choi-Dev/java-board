@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>새글 생성</h1>
-<form action="/post" method="post">
+<form th:action="@{/post}" method="post">
     <input th:if="${board.id != null}" type="hidden" name="id" th:value="${board.id}"/>
     <input type="text" name="title" placeholder="제목" th:value="${board.title}"/>
     <textarea name="content" placeholder="내용" th:text="${board.content}"></textarea>

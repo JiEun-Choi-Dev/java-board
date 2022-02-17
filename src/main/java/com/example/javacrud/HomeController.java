@@ -46,7 +46,7 @@ public class HomeController {
             }
         }
         model.addAttribute("board", boardEntity);
-        return "manage";
+        return "pages/manage";
     }
 
     /**

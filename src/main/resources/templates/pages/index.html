@@ -10,25 +10,43 @@
     <title>Document</title>
 
     <th:block layout:fragment="css">
-        <link rel="stylesheet" th:href="@{/css/page/home.css}" >
+        <link rel="stylesheet" th:href="@{static/css/common/common.css}" >
     </th:block>
 
-    <!-- index.html 고유 스크립트 추가 -->
     <th:block layout:fragment="script">
-        <script th:src="@{/js/page/home.js}"></script>
+        <script th:src="@{static/js/common/common.js}"></script>
     </th:block>
 </head>
 <body>
     <div layout:fragment="content">
-
-        <h1>글 목록</h1>
-        <a href="/manage">글 작성</a>
-        <p th:text="${name}"></p>
-        <ul>
-            <li th:each="item, index : ${list}">
-                <a th:href="@{/post/__${item.id}__}" th:text="${item.title}">글 제목</a>
-            </li>
-        </ul>
+        <div class="search_container m-5">
+            <form class="my-2 my-lg-0">
+                <div class="row height d-flex justify-content-center align-items-center">
+                    <div class="col-md-8">
+                        <div class="form">
+                            <input type="text" class="form-control form-input" placeholder="Search anything...">
+                            <span class="left-pan">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="d-flex justify-content-end mb-4">
+            <a class="btn btn-outline-custom" href="/manage">글 작성</a>
+        </div>
+        <div class="card-columns">
+            <div class="card" th:each="item, index : ${list}">
+                <div class="card-body" >
+                    <a class="card-link" th:href="@{/post/__${item.id}__}" >
+                        <h5 class="card-title" th:text="${item.title}"></h5>
+                        <p class="card-text" th:text="${item.content}"></p>
+                        <p class="card-text"><small class="text-muted" th:text="${item.createdAt}"></small></p>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
