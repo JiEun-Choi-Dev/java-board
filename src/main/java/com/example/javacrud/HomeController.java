@@ -33,6 +33,12 @@ public class HomeController {
 
             ){
 
+        if(q == null){
+            q = "";
+        }else{
+            q = q;
+        };
+
         TypedQuery<BoardEntity> query =
                 em.createQuery("select vo from BoardEntity vo Where vo.title like concat('%', :like, '%') or vo.content like concat('%', :like, '%')" ,BoardEntity.class);
 
