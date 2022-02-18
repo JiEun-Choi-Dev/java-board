@@ -20,11 +20,11 @@
 <body>
     <div layout:fragment="content">
         <div class="search_container m-5">
-            <form class="my-2 my-lg-0">
+            <form th:action="@{/}" class="my-2 my-lg-0" method="get">
                 <div class="row height d-flex justify-content-center align-items-center">
                     <div class="col-md-8">
                         <div class="form">
-                            <input type="text" class="form-control form-input" placeholder="Search anything...">
+                            <input type="text" th:name="q" th:value="${q}" class="form-control form-input" placeholder="Search anything...">
                             <span class="left-pan">
                                 <i class="fa fa-search"></i>
                             </span>

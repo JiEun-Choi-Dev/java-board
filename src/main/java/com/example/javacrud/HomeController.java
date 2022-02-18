@@ -1,14 +1,19 @@
 package com.example.javacrud;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Controller
@@ -16,16 +21,32 @@ public class HomeController {
     @Autowired
     private BoardRepository boardRepository;
 
+    @Autowired
+    private EntityManager em;
+
     @GetMapping("/")
     public String homePage(
             Model model,
-            Authentication authentication
-    ){
+            Authentication authentication,
+            @RequestParam(required = false) String q,
+            @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
+
+            ){
+
+        TypedQuery<BoardEntity> query =
+                em.createQuery("select vo from BoardEntity vo Where vo.title like concat('%', :like, '%') or vo.content like concat('%', :like, '%')" ,BoardEntity.class);
+
+        query.setParameter("like", q);
+
+        query.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
+        query.setMaxResults(pageable.getPageSize());
+
 
         model.addAttribute("name","zinna");
-        List<BoardEntity> list = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
+        List<BoardEntity> list = query.getResultList();
         model.addAttribute("list",list);
         model.addAttribute("authentication", authentication);
+        model.addAttribute("q", q);
         return "pages/index";
     }
 
@@ -74,7 +95,7 @@ public class HomeController {
 
         model.addAttribute("title",board.getTitle());
         model.addAttribute("content", board.getContent());
-        return "/detail";
+        return "pages/detail";
     }
 
     /***
